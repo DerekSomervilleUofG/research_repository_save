@@ -1,0 +1,17 @@
+from repository_save.population_mapping.ControlPopulate import ControlPopulate
+from class_structure.ClassStructure import ClassStructure as SuperClass
+class ClassStructure(SuperClass):
+    
+    control_populate = ControlPopulate()
+
+    def __init__(self, name, amendment, owned_by_file=None, primary_key=0):
+        super().__init__(name, amendment, owned_by_file, primary_key)
+        self.populate_structure = self.control_populate.get_populate_class()
+        self.populate_commit = self.control_populate.get_populate_commit_class()
+        self.populate_structure.add_structure(self)
+        if owned_by_file.developer_commit is not None:
+            self.populate_commit.add_structure(self)
+        
+
+
+    

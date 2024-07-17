@@ -1,0 +1,27 @@
+[project]
+name = "repository_structure_save"
+version = "2024.0.0"
+dependencies = [
+  "utility @ git+https://git.dcs.gla.ac.uk/DerekSomerville/utility",
+  "class_structure @ git+https://git.dcs.gla.ac.uk/DerekSomerville/class_structure",
+
+]
+requires-python = ">=3.9"
+authors = [
+  {name = "Derek Somerville", email = "derek.somerville@glasgow.ac.uk"}
+]
+description = "Save to a database in for the repository structure"
+readme = "README.md"
+license = {file = "LICENSE.txt"}
+keywords = ["read", "write", "text"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
+
+[project.urls]
+Repository = "https://git.dcs.gla.ac.uk/DerekSomerville/repository_save.git"
+
+[tool.setuptools]
+packages = ["repository_save", "repository_save.class_structure", "repository_save.data_source", "repository_save.population_mapping"]
+py-modules = ["__init__"] 

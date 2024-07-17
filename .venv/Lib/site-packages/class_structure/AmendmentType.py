@@ -1,0 +1,5 @@
+changed = "Changed"
+added = "Added"
+deleted = "Deleted"
+renamed = "Renamed"
+calls = "Calls"
