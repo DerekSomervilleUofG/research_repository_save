@@ -1,5 +1,5 @@
 [project]
-name = "repository_structure_save"
+name = "repository_save"
 version = "2024.0.0"
 dependencies = [
   "utility @ git+https://git.dcs.gla.ac.uk/DerekSomerville/utility",
