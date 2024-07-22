@@ -17,7 +17,7 @@ class PopulateDeveloper(PopulateStructure):
         self.developer_id = 0
         self.name = 1
         self.table_name = "developer"
-        self.all_columns = "developer_id, name"
+        self.all_columns = "developer_id, name, email, login"
         self.primary_key = "developer_id"
 
         if not self.created:
