@@ -21,7 +21,7 @@ class Main():
 
     def test_run_class_structure(self):
         repository = Repository("https://stgit.dcs.gla.ac.uk/DerekSomerville/marking.git")
-        developer = Developer("Derek Somerville", "derek.somerville@glasgow.ac.uk", None)
+        developer = Developer("Derek Somerville", "derek.somerville@glasgow.ac.uk")
         developer_commit = DeveloperCommit("1234", "Derek Somerville", "27-Jun-2024", "Test", repository, developer)
         repository.add_commit(developer_commit)
         file = File("Test.py", added)
@@ -34,7 +34,7 @@ class Main():
         
     def test_run_developer_batch(self):
         for counter in range(1000):
-            developer = Developer(str(counter))
+            developer = Developer(str(counter), "email@test.com")
         self.control_populate.save_all()
         populate_developer = self.control_populate.get_populate_developer()
         select_cursor = populate_developer.prepare_batch_select()
