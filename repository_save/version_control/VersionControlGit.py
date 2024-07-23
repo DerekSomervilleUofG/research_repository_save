@@ -19,7 +19,6 @@ class VersionControlGit(VersionControl):
         if "http" in repo_path:
             if not os.path.isdir(repo_name):
                 os.mkdir(repo_name)
-            if not os.path.isdir(repo_name):
                 Repo.clone_from(repo_path, repo_name)
         repo = Repo(repo_name)
         os.chdir(work_directory)
