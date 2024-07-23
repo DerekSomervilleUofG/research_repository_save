@@ -23,5 +23,5 @@ classifiers = [
 Repository = "https://git.dcs.gla.ac.uk/DerekSomerville/repository_save.git"
 
 [tool.setuptools]
-packages = ["repository_save", "repository_save.class_structure", "repository_save.data_source", "repository_save.population_mapping"]
+packages = ["repository_save", "repository_save.class_structure", "repository_save.data_source", "repository_save.population_mapping", "repository_save.version_control"]
 py-modules = ["__init__"] 
