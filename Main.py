@@ -7,6 +7,7 @@ from repository_save.class_structure.File import File
 from repository_save.class_structure.ClassStructure import ClassStructure
 from repository_save.class_structure.Method import Method
 from repository_save.class_structure.Developer import Developer
+from repository_save.version_control.VersionControlGit import VersionControlGit
 from class_structure.AmendmentType import *
 
 class Main():
@@ -20,7 +21,7 @@ class Main():
 
     def test_run_class_structure(self):
         repository = Repository("https://stgit.dcs.gla.ac.uk/DerekSomerville/marking.git")
-        developer = Developer("Derek Somerville")
+        developer = Developer("Derek Somerville", "derek.somerville@glasgow.ac.uk", None)
         developer_commit = DeveloperCommit("1234", "Derek Somerville", "27-Jun-2024", "Test", repository, developer)
         repository.add_commit(developer_commit)
         file = File("Test.py", added)
@@ -41,9 +42,15 @@ class Main():
         print("First batch", developers)
         print("Second batch", populate_developer.next_batch_select(select_cursor, 5))
         select_cursor.close()
+
+    def version_control(self):
+        version_control_git = VersionControlGit()
+        repo = version_control_git.get_repo("output/dummy-repo","https://github.com/DerekSomervilleUofG/dummy-repo.git")
+        print("Number of commits", len(version_control_git.get_commits_on_branch(repo, None, None)))
         
 def main():
     main = Main()
+    main.version_control()
     main.test_run_class_structure()
     main.test_run_developer_batch()
 
