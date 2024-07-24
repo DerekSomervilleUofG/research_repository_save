@@ -8,6 +8,7 @@ from repository_save.class_structure.ClassStructure import ClassStructure
 from repository_save.class_structure.Method import Method
 from repository_save.class_structure.Developer import Developer
 from repository_save.version_control.VersionControlGit import VersionControlGit
+from repository_save.Main import Main as RepositoryMain
 from class_structure.AmendmentType import *
 
 class Main():
@@ -49,6 +50,8 @@ class Main():
         print("Number of commits", len(version_control_git.get_commits_on_branch(repo, None, None)))
         
 def main():
+    repository_main = RepositoryMain()
+    repository_main.main("c:/Users/Derek Somerville/Documents/Research/refactor_code_base/src/resource/database/")
     main = Main()
     main.version_control()
     main.test_run_class_structure()
