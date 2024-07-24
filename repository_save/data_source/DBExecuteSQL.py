@@ -13,6 +13,11 @@ class DBExecuteSQL(object):
             cls.__instance = super(DBExecuteSQL, cls).__new__(
                                 cls, *args, **kwargs)
         return cls.__instance
+    
+    def set_db_file_name(self, db_file_name):
+        self.connection = None
+        self.db_connector.set_db_file_name(db_file_name)
+        self.get_connection()
 
     def set_db_connector(self, db_connector):
         self.db_connector = db_connector
