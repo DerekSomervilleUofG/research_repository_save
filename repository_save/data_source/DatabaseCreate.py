@@ -9,6 +9,7 @@ class DatabaseCreate:
     
     def __init__(self) -> None:
         self.tables = ["repository", "developer", "developer_commit", "package", "file", "file_method", "class", "method", "commit_file", "commit_class", "commit_method"]
+        self.delete_tables = []
         
     def drop(self, tables):
         for table in tables:
@@ -29,5 +30,6 @@ class DatabaseCreate:
 
     def setup(self):
         self.create_tables(self.tables)
+        self.delete_all(self.delete_tables)
 
 
