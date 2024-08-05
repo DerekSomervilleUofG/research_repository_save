@@ -51,7 +51,7 @@ class Main():
         
 def main():
     repository_main = RepositoryMain()
-    repository_main.main("c:/Users/Derek Somerville/Documents/Research/refactor_code_base/src/resource/database/")
+    repository_main.main("../refactor_code_base/src/resource/database/")
     main = Main()
     main.version_control()
     main.test_run_class_structure()

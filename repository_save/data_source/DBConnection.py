@@ -9,12 +9,6 @@ class DBConnection():
     sql_lite_url = db_file_prefix + db_file_name
     _instance = None
 
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(DBConnection, cls).__new__(
-                                cls, *args, **kwargs)
-        return cls._instance
-
     def set_db_file_name(self, db_file_name):
         self.db_file_name = db_file_name
         if "/" in db_file_name:
