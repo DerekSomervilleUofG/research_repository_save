@@ -56,6 +56,9 @@ class ControlPopulate:
     def set_db_file_name(self, db_file_name):
         self.db_execute_sql.set_db_file_name(db_file_name)
     
+    def get_db_execute_sql(self):
+        return self.db_execute_sql
+    
     def get_populate_repository(self):
         return self.populate_repository
     

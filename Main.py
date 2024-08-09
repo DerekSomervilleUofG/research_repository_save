@@ -16,7 +16,7 @@ class Main():
     def __init__(self) -> None:
         self.db_connection = DBConnection()
         self.control_populate = ControlPopulate()
-        self.database_create = DatabaseCreate()
+        self.database_create = DatabaseCreate(self.control_populate.get_db_execute_sql())
         self.db_connection.set_db_file_name("Test.db")
         self.database_create.setup()
 

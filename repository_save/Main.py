@@ -5,9 +5,10 @@ import sys
 
 class Main():
     
-    database_create = DatabaseCreate()
-    control_populate = ControlPopulate()
-    read_write_file = ReadWriteFile()
+    def __init__(self) -> None:
+        self.control_populate = ControlPopulate()
+        self.database_create = DatabaseCreate(self.control_populate.get_db_execute_sql())
+        self.read_write_file = ReadWriteFile()
     
     def before_processing(self):
         pass

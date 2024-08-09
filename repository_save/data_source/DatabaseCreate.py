@@ -2,12 +2,11 @@ from repository_save.data_source.DBExecuteSQL import DBExecuteSQL
 from utility.ReadWriteFile import ReadWriteFile
 
 class DatabaseCreate:
-
-
-    db_execute_sql = DBExecuteSQL()
+    
     read_write_file = ReadWriteFile()
     
-    def __init__(self) -> None:
+    def __init__(self, db_execute_sql) -> None:
+        self.db_execute_sql = db_execute_sql
         self.tables = ["repository", "developer", "developer_commit", "package", "file", "file_method", "class", "method", "commit_file", "commit_class", "commit_method"]
         self.delete_tables = []
         
