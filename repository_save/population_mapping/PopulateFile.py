@@ -3,15 +3,9 @@ from repository_save.population_mapping.PopulateStructure import PopulateStructu
 class PopulateFile(PopulateStructure):
 
     created = False
-    _instance = None
 
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(PopulateFile, cls).__new__(
-                                cls, *args, **kwargs)
-        return cls._instance
-
-    def __init__(self):
+    def __init__(self, db_execute_sql):
+        super().__init__(db_execute_sql)
         self.file_id = 0
         self.name = 1
         self.package_id = 2

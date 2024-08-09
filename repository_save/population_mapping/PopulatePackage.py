@@ -2,16 +2,10 @@ from repository_save.population_mapping.PopulateStructure import PopulateStructu
 
 class PopulatePackage(PopulateStructure):
 
-    _instance = None
     created = False
 
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(PopulatePackage, cls).__new__(
-                                cls, *args, **kwargs)
-        return cls._instance
-
-    def __init__(self):
+    def __init__(self, db_execute_sql):
+        super().__init__(db_execute_sql)
         self.package_id = 0
         self.name = 1
         self.repository_id = 2

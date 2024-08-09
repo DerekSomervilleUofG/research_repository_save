@@ -4,14 +4,16 @@ from repository_save.population_mapping.PopulatePackage import PopulatePackage
 from repository_save.population_mapping.PopulateCommitFile import PopulateCommitFile
 class DeveloperCommit(SuperClass):
     
-    control_populate = ControlPopulate()
+    
     store_repo_packages = True
-    populate_package = PopulatePackage()
-    populate_commit_file = PopulateCommitFile()
+
 
     def __init__(self, name, author, date, message, repository, developer):
         super().__init__(name, author, date, message, repository, developer)
+        self.control_populate = ControlPopulate()
         self.populate_structure = self.control_populate.get_populate_developer_commit()
+        self.populate_package = self.control_populate.get_populate_package()
+        self.populate_commit_file = self.control_populate.get_populate_commit_file()
         self.populate_structure.add_structure(self)
         
     def populate_packages(self, packages, prior_knowledge_id):

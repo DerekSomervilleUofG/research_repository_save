@@ -5,15 +5,8 @@ class DBExecuteSQL(object):
 
     db_connector = DBConnection()
     connection = None
-    __instance = None
     batch_size = 1000
-
-    def __new__(cls, *args, **kwargs):
-        if not cls.__instance:
-            cls.__instance = super(DBExecuteSQL, cls).__new__(
-                                cls, *args, **kwargs)
-        return cls.__instance
-    
+   
     def set_db_connector(self, db_connector):
         self.db_connector = db_connector
     

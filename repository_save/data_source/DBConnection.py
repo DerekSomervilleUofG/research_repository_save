@@ -7,7 +7,6 @@ class DBConnection():
     db_file_name = db_file_template
     in_memory_database = ":memory:"
     sql_lite_url = db_file_prefix + db_file_name
-    _instance = None
 
     def set_db_file_name(self, db_file_name):
         self.db_file_name = db_file_name

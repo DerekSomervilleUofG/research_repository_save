@@ -8,27 +8,32 @@ from repository_save.population_mapping.PopulateDeveloperCommit import PopulateD
 from repository_save.population_mapping.PopulateCommitFile import PopulateCommitFile
 from repository_save.population_mapping.PopulateCommitClass import PopulateCommitClass
 from repository_save.population_mapping.PopulateCommitMethod import PopulateCommitMethod
+from repository_save.data_source.DBExecuteSQL import DBExecuteSQL
 
 class ControlPopulate:
-
-    populate_repository = PopulateRepository()
-    populate_package = PopulatePackage()
-    populate_file = PopulateFile()
-    populate_class = PopulateClass()
-    populate_method = PopulateMethod()
-    populate_developer = PopulateDeveloper()
-    populate_developer_commit = PopulateDeveloperCommit()
-    populate_commit_file = PopulateCommitFile()
-    populate_commit_class = PopulateCommitClass()
-    populate_commit_method = PopulateCommitMethod()
-
-
     __instance = None
 
     def __new__(cls, *args, **kwargs):
         if ControlPopulate.__instance is None:
             ControlPopulate.__instance = super(ControlPopulate, cls).__new__(cls, *args, **kwargs)
         return ControlPopulate.__instance
+
+    def __init__(self) -> None:
+        self.setup()
+
+    def setup(self):
+        self.db_execute_sql = DBExecuteSQL()
+        self.populate_repository = PopulateRepository(self.db_execute_sql)
+        self.populate_package = PopulatePackage(self.db_execute_sql)
+        self.populate_file = PopulateFile(self.db_execute_sql)
+        self.populate_class = PopulateClass(self.db_execute_sql)
+        self.populate_method = PopulateMethod(self.db_execute_sql)
+        self.populate_developer = PopulateDeveloper(self.db_execute_sql)
+        self.populate_developer_commit = PopulateDeveloperCommit(self.db_execute_sql)
+        self.populate_commit_file = PopulateCommitFile(self.db_execute_sql)
+        self.populate_commit_class = PopulateCommitClass(self.db_execute_sql)
+        self.populate_commit_method = PopulateCommitMethod(self.db_execute_sql)
+
 
     def save_all(self):
         self.populate_repository.save_rows()
@@ -48,8 +53,14 @@ class ControlPopulate:
         self.populate_commit_class.save_rows()
         self.populate_commit_method.save_rows()
     
+    def set_db_file_name(self, db_file_name):
+        self.db_execute_sql.set_db_file_name(db_file_name)
+    
     def get_populate_repository(self):
         return self.populate_repository
+    
+    def get_populate_package(self):
+        return self.populate_package
 
     def get_populate_file(self):
         return self.populate_file

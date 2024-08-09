@@ -4,15 +4,9 @@ from utility.UtilityText import UtilityText
 class PopulateMethod(PopulateStructure):
 
     created = False
-    _instance = None
 
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(PopulateMethod, cls).__new__(
-                                cls, *args, **kwargs)
-        return cls._instance
-
-    def __init__(self):
+    def __init__(self, db_execute_sql):
+        super().__init__(db_execute_sql)
         self.table_name = "method"
         self.all_columns = "method_id, name, class_id"
         self.primary_key = "method_id"

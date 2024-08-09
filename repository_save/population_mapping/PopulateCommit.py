@@ -1,6 +1,9 @@
 from repository_save.population_mapping.PopulateTable import PopulateTable
 
 class PopulateCommit(PopulateTable):
+    
+    def __init__(self, db_execute_sql):
+        super().__init__(db_execute_sql)
 
     def generate_row(self, structure):
         row = []

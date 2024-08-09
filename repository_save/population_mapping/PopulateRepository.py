@@ -3,10 +3,8 @@ from repository_save.population_mapping.PopulateStructure import PopulateStructu
 
 class PopulateRepository(PopulateStructure):
 
-    db_execute_sql = DBExecuteSQL()
-
-    def __init__(self):
-        super().__init__()
+    def __init__(self, db_execute_sql):
+        super().__init__(db_execute_sql)
         self.name = 1
         self.url = 2
         self.table_name = "repository"

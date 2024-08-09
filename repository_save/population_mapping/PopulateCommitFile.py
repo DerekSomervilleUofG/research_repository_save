@@ -9,8 +9,11 @@ class PopulateCommitFile(PopulateCommit):
     sql_repository_id = 3
     sql_commit_id = 4
     sql_developer_id = 5
+    
+    created = False
 
-    def __init__(self):
+    def __init__(self, db_execute_sql):
+        super().__init__(db_execute_sql)
 
         self.table_name = "commit_file"
         self.all_columns = "name, lines_added, lines_changed, lines_removed, lines_same, lines_similar, amendment_type, file_id, commit_id, package_id, repository_id"
@@ -21,14 +24,9 @@ class PopulateCommitFile(PopulateCommit):
             self.counter = 0
         self.created = True
 
-    created = False
-    _instance = None
 
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(PopulateCommitFile, cls).__new__(
-                                cls, *args, **kwargs)
-        return cls._instance
+
+
 
 
     def insert_commit_file(self, file, package_id, commit_id, repository_id):

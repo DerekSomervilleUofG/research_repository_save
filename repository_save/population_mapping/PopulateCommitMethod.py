@@ -8,8 +8,11 @@ class PopulateCommitMethod(PopulateCommit):
     sql_class_id = 2
     sql_commit_id = 3
     sql_developer_id = 4
+    
+    created = False
 
-    def __init__(self):
+    def __init__(self, db_execute_sql):
+        super().__init__(db_execute_sql)
         self.table_name = "commit_method"
         self.all_columns = "name, lines_added, lines_changed, lines_removed, lines_same, lines_similar, amendment_type, method_id, class_id, commit_id"
         self.primary_key = ""
@@ -19,16 +22,6 @@ class PopulateCommitMethod(PopulateCommit):
             self.list_structures = []
             self.counter = 0
         self.created = True
-
-    created = False
-    _instance = None
-
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(PopulateCommitMethod, cls).__new__(
-                                cls, *args, **kwargs)
-        return cls._instance
-
 
     def insert_commit_method_with_data(self, method_data):
         insert_statement = "INSERT INTO commit_method (name, lines_added, lines_changed, lines_removed, lines_same, lines_similar, amendment_type, method_id, class_id, commit_id) "

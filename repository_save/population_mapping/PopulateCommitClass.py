@@ -7,8 +7,11 @@ class PopulateCommitClass(PopulateCommit):
     sql_file_id = 2
     sql_commit_id = 3
     sql_developer_id = 4
+    
+    created = False
 
-    def __init__(self):
+    def __init__(self, db_execute_sql):
+        super().__init__(db_execute_sql)
         self.table_name = "commit_class"
         self.all_columns = "name, lines_added, lines_changed, lines_removed, lines_same, lines_similar, amendment_type, class_id, file_id, commit_id"
         self.primary_key = ""
@@ -17,16 +20,6 @@ class PopulateCommitClass(PopulateCommit):
             self.list_structures = []
             self.counter = 0
         self.created = True
-
-    created = False
-    _instance = None
-
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(PopulateCommitClass, cls).__new__(
-                                cls, *args, **kwargs)
-        return cls._instance
-
 
     def generate_mapping(self, class_used):
         code_change_statistic = class_used.code_change_statistic

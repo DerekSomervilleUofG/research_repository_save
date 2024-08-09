@@ -1,9 +1,11 @@
 from repository_save.population_mapping.PopulateStructure import PopulateStructure
+from repository_save.data_source.DBExecuteSQL import DBExecuteSQL
 from unittest import TestCase
 
 class TestPopulateStructure(TestCase):
 
-    populate_structure = PopulateStructure()
+    db_execute_sql = DBExecuteSQL()
+    populate_structure = PopulateStructure(db_execute_sql)
 
     def test_get_insert_columns(self):
         self.assertEqual(" name", self.populate_structure.get_insert_columns())

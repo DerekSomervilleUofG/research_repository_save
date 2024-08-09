@@ -3,8 +3,8 @@ from utility.ListUtility import ListUtility
 
 class PopulateStructure(PopulateTable):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, db_execute_sql):
+        super().__init__(db_execute_sql)
         self.table_name = "structure"
         self.all_columns = "primary_key, name"
         self.primary_key = "primary_key"

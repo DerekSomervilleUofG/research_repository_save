@@ -1,9 +1,11 @@
 from repository_save.population_mapping.PopulateTable import PopulateTable
+from repository_save.data_source.DBExecuteSQL import DBExecuteSQL
 from unittest import TestCase
 
 class TestPopulateTable(TestCase):
 
-    populate_table = PopulateTable()
+    db_execute_sql = DBExecuteSQL()
+    populate_table = PopulateTable(db_execute_sql)
 
     def test_generate_insert_values(self):
         columns = "first_column, second_column, third_column"

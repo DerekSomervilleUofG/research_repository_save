@@ -5,27 +5,16 @@ from repository_save.population_mapping.PopulateStructure import PopulateStructu
 
 class PopulateDeveloperCommit(PopulateStructure):
 
-    populate_developer = PopulateDeveloper()
-
-
     created = False
-    _instance = None
 
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(PopulateDeveloperCommit, cls).__new__(
-                                cls, *args, **kwargs)
-        return cls._instance
-
-    def __init__(self):
+    def __init__(self, db_execute_sql):
+        super().__init__(db_execute_sql)
         self.commit_id = 0
-        self.author = 1
-        self.authored_date = 2
-        self.message = 3
-        self.repository_id = 4
-        self.developer_id = 5
+        self.authored_date = 1
+        self.repository_id = 2
+        self.developer_id = 3
         self.table_name = "developer_commit"
-        self.all_columns = "commit_id, author, authored_date, message, repository_id, developer_id"
+        self.all_columns = "commit_id, authored_date, repository_id, developer_id"
         self.primary_key = ""  # We save with the commit_id
         self.foreign_key = "repository_id"
         if not self.created:
@@ -37,8 +26,7 @@ class PopulateDeveloperCommit(PopulateStructure):
     def generate_developer_commit_data(self, developer_commits):
         commit_data = []
         for commit in developer_commits:
-            commit_data.append([commit.get_name(), Utilities.formate_text(commit.author), commit.date,
-                                UtilityText.formate_text(commit.message), commit.repository.repository_id, commit.developer.developer_id])
+            commit_data.append([commit.get_name(), commit.date, commit.repository.repository_id, commit.developer.developer_id])
         return commit_data
 
     def update_developer_commit_repo_count(self, developer_commit, repository):
@@ -57,7 +45,7 @@ class PopulateDeveloperCommit(PopulateStructure):
         return sql_data
 
     def select_commit_and_repo_count(self, repository_id):
-        select_statement = "SELECT dc.commit_id, dc.author, dc.authored_date "
+        select_statement = "SELECT dc.commit_id, dc.authored_date "
         select_statement += ", dc.number_of_repo_packages, dc.number_of_repo_files, dc.number_of_repo_classes, dc.number_of_repo_methods "
         select_statement += " FROM developer_commit dc "
         select_statement += " where repository_id = " + str(repository_id)
@@ -102,5 +90,5 @@ class PopulateDeveloperCommit(PopulateStructure):
         self.db_execute_sql.execute_sql_command(delete_statement)
 
     def generate_row(self, developer_commit):
-        return ["'" + UtilityText.formate_text(developer_commit.get_name()) + "'", "'" + UtilityText.formate_text(developer_commit.get_author_name()) + "'","'" + UtilityText.formate_text(developer_commit.get_author_name()) + "'",  "'" + UtilityText.formate_text(developer_commit.get_message_first_line()) + "'", str(developer_commit.repository.get_repository_id()), str(developer_commit.developer.get_primary_key())]
+        return ["'" + UtilityText.formate_text(developer_commit.get_name()) + "'", "'" + UtilityText.formate_text(developer_commit.get_author_date()) + "'", str(developer_commit.repository.get_repository_id()), str(developer_commit.developer.get_primary_key())]
     

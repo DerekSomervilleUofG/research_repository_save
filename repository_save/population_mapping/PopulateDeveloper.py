@@ -4,16 +4,9 @@ from utility.UtilityText import UtilityText
 class PopulateDeveloper(PopulateStructure):
 
     created = False
-    _instance = None
 
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(PopulateDeveloper, cls).__new__(
-                                cls, *args, **kwargs)
-        return cls._instance
-
-    def __init__(self):
-        super().__init__()
+    def __init__(self, db_execute_sql):
+        super().__init__(db_execute_sql)
         self.developer_id = 0
         self.name = 1
         self.table_name = "developer"

@@ -1,10 +1,12 @@
 from repository_save.population_mapping.PopulateRepository import PopulateRepository
+from repository_save.data_source.DBExecuteSQL import DBExecuteSQL
 from class_structure.Repository import Repository
 from unittest import TestCase
 
 class TestPopulateRepository(TestCase):
-
-    populate_repository = PopulateRepository()
+    
+    db_execute_sql = DBExecuteSQL()
+    populate_repository = PopulateRepository(db_execute_sql)
     repository = Repository("https://stgit.dcs.gla.ac.uk/DerekSomerville/database_batch_save.git")
 
     def test_generate_insert_values(self):

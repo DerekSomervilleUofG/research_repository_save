@@ -1,12 +1,11 @@
-from repository_save.data_source.DBExecuteSQL import DBExecuteSQL
 from utility.UtilityText import UtilityText
 
 class PopulateTable:
 
-    db_execute_sql = DBExecuteSQL()
     batch_size = 1000
 
-    def __init__(self):
+    def __init__(self, db_execute_sql):
+        self.db_execute_sql = db_execute_sql
         self.sql_rows = []
         self.list_structures = []
 

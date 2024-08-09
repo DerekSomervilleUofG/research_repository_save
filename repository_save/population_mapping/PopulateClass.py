@@ -4,18 +4,10 @@ from repository_save.population_mapping.PopulateMethod import PopulateMethod
 
 class PopulateClass(PopulateStructure):
 
-    populate_method = PopulateMethod()
-
     created = False
-    _instance = None
 
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(PopulateClass, cls).__new__(
-                                cls, *args, **kwargs)
-        return cls._instance
-
-    def __init__(self):
+    def __init__(self, db_execute_sql):
+        super().__init__(db_execute_sql)
         self.table_name = "class"
         self.all_columns = "class_id, name, file_id"
         self.primary_key = "class_id"
@@ -93,11 +85,6 @@ class PopulateClass(PopulateStructure):
             prior_method_row.append(prior_knowledge_id)
             prior_method_data.append(prior_method_row)
         return prior_method_data
-
-    def set_method_active(self, class_used, is_active=0):
-        for method in class_used.methods:
-            if method.is_active():
-                self.populate_method.update_method_is_active(method.get_method_id(), is_active)
 
     def get_class_by_name(self, class_used, file_id):
         sql_data = self.select_record_by_foreign_key_and_name(file_id, class_used.get_name())
