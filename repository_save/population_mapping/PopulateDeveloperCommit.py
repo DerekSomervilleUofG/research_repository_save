@@ -14,7 +14,7 @@ class PopulateDeveloperCommit(PopulateStructure):
         self.repository_id = 2
         self.developer_id = 3
         self.table_name = "developer_commit"
-        self.all_columns = "commit_id, author, authored_date, repository_id, developer_id"
+        self.all_columns = "commit_id, authored_date, repository_id, developer_id"
         self.primary_key = ""  # We save with the commit_id
         self.foreign_key = "repository_id"
         if not self.created:
@@ -90,5 +90,5 @@ class PopulateDeveloperCommit(PopulateStructure):
         self.db_execute_sql.execute_sql_command(delete_statement)
 
     def generate_row(self, developer_commit):
-        return ["'" + UtilityText.formate_text(developer_commit.get_name()) + "'", "'" + UtilityText.formate_text(developer_commit.developer.get_name())+ "'", "'" + UtilityText.formate_text(developer_commit.get_author_date()) + "'", str(developer_commit.repository.get_repository_id()), str(developer_commit.developer.get_primary_key())]
+        return ["'" + UtilityText.formate_text(developer_commit.get_name()) + "'", "'" + UtilityText.formate_text(developer_commit.get_author_date()) + "'", str(developer_commit.repository.get_repository_id()), str(developer_commit.developer.get_primary_key())]
     
