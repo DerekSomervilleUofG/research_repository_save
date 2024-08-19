@@ -5,9 +5,10 @@ import sys
 
 class Main():
     
+    read_write_file = ReadWriteFile()
+    control_populate = ControlPopulate()
+
     def __init__(self) -> None:
-        self.read_write_file = ReadWriteFile()
-        self.control_populate = ControlPopulate()
         self.database_create = DatabaseCreate(self.control_populate.get_db_execute_sql())
     
     def before_processing(self):
@@ -28,6 +29,6 @@ class Main():
             if ".db" in database:
                 self.control_populate.set_db_file_name(directory + database)
                 self.database_setup()
-                self.process_database(database)
+                self.process_database(self.control_populate)
         self.after_processing()
 
