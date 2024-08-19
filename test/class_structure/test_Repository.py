@@ -1,5 +1,5 @@
-from repository_save.class_structure.Repository import Repository
 from unittest import TestCase
+from repository_save.class_structure.Repository import Repository
 
 class TestRepository(TestCase):
 

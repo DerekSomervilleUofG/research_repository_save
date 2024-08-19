@@ -8,5 +8,8 @@ class TestPopulateDeveloper(TestCase):
     developer = Developer("Derek", "derek.somerville@glasgow.ac.uk", "derek.somerville")
     populate_developer = PopulateDeveloper(DBExecuteSQL())
     
+    def test_developer_get_name(self):
+        self.assertEqual("Derek", self.developer.get_name())
+    
     def test_generate_row(self):
-        self.assertEqual( ["'Derek'", "'derek.somerville@glasgow.ac.uk'", "'derek.somerville'"] ,self.populate_developer.generate_row(self.developer))
+        self.assertEqual( ["Derek", "derek.somerville@glasgow.ac.uk", "derek.somerville"] ,self.populate_developer.generate_row(self.developer))

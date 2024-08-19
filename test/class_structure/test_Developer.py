@@ -1,5 +1,6 @@
-from repository_save.class_structure.Developer import Developer
 from unittest import TestCase
+from repository_save.class_structure.Developer import Developer
+
 
 class TestDeveloper(TestCase):
     

@@ -90,5 +90,5 @@ class PopulateDeveloperCommit(PopulateStructure):
         self.db_execute_sql.execute_sql_command(delete_statement)
 
     def generate_row(self, developer_commit):
-        return ["'" + UtilityText.formate_text(developer_commit.get_name()) + "'", "'" + UtilityText.formate_text(developer_commit.get_author_date()) + "'", str(developer_commit.repository.get_repository_id()), str(developer_commit.developer.get_primary_key())]
+        return [UtilityText.formate_text(developer_commit.get_name()), UtilityText.formate_text(developer_commit.get_author_date()), str(developer_commit.repository.get_repository_id()), str(developer_commit.developer.get_primary_key())]
     

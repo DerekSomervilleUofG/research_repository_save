@@ -59,4 +59,4 @@ class PopulateDeveloper(PopulateStructure):
         return sql_data[0][0]
 
     def generate_row(self, developer):
-        return ["'" + UtilityText.formate_text(developer.get_name()) + "'",  "'" + developer.get_email() + "'", "'" + UtilityText.formate_text(developer.get_login()) + "'"  ]
+        return [UtilityText.formate_text(developer.get_name()),  developer.get_email() , UtilityText.formate_text(developer.get_login()) ]
