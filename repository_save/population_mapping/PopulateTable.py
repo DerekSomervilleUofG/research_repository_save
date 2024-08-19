@@ -16,6 +16,9 @@ class PopulateTable:
         self.counter = 0
         self.has_next = True
 
+    def set_db_execute_sql(self, db_execute_sql):
+        self.db_execute_sql = db_execute_sql
+
     def get_insert_columns(self):
         if self.primary_key is not None and self.primary_key != "":
             columns = self.all_columns.replace(self.primary_key + ",","")
