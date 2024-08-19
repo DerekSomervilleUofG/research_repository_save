@@ -14,8 +14,8 @@ class Main():
     def before_processing(self):
         pass
     
-    def process_database(self, database):
-        print(database)
+    def process_database(self, control_populate):
+        print(control_populate.get_db_execute_sql().get_database_name())
 
     def after_processing(self):
         pass
