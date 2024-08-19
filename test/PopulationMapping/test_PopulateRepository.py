@@ -7,7 +7,8 @@ class TestPopulateRepository(TestCase):
     
     db_execute_sql = DBExecuteSQL()
     populate_repository = PopulateRepository(db_execute_sql)
-    repository = Repository("https://stgit.dcs.gla.ac.uk/DerekSomerville/database_batch_save.git")
+    repository_name = "https://stgit.dcs.gla.ac.uk/DerekSomerville/database_batch_save.git"
+    repository = Repository(repository_name)
 
     def test_generate_insert_values(self):
         columns = "repository_id, name, url"
@@ -27,3 +28,6 @@ class TestPopulateRepository(TestCase):
 
     def test_generate_select_record(self):
         self.assertEqual("SELECT repository_id FROM repository", self.populate_repository.generate_select_record("repository", "repository_id"))
+
+    def test_generate_row(self):
+        self.assertEqual( ["database_batch_save", self.repository_name], self.populate_repository.generate_row(self.repository))
