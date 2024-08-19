@@ -9,6 +9,8 @@ class TestDBExecuteSQL(TestCase):
     database_one = "resource/database/db_execute_test_one.db"
     database_two = "resource/database/db_execute_test_two.db"
     database_second = "resource/database/db_execute_test_second.db"
+    database_three = "resource/database/db_execute_test_three.db"
+    database_four = "resource/database/db_execute_test_four.db"
     
     def setUp(self):
         pass
@@ -24,3 +26,9 @@ class TestDBExecuteSQL(TestCase):
         self.db_execute_sql.set_db_file_name(self.database_two)
         self.db_execute_sql.set_db_file_name(self.database_second)
         self.assertTrue(self.read_write_file.file_exists(self.database_second))
+
+    def test_get_database_name(self):
+        self.db_execute_sql.set_db_file_name(self.database_three)
+        self.db_execute_sql.set_db_file_name(self.database_four)
+        self.assertEqual("db_execute_test_four.db", self.db_execute_sql.get_database_name())
+

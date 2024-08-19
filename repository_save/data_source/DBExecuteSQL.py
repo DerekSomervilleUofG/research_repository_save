@@ -35,6 +35,10 @@ class DBExecuteSQL(object):
     def begin_exclusive(self):
         self.execute_sql_command("BEGIN EXCLUSIVE; ")
 
+    def get_database_name(self):
+        sql_data = self.execute_sql_select("SELECT file FROM pragma_database_list")
+        return sql_data[0][0].split("\\")[-1]
+
     def execute_sql_command(self, sql_command):
         try:
             execute_cursor = self.get_connection().cursor()
