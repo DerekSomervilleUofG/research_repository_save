@@ -1,6 +1,6 @@
 from repository_save.population_mapping.PopulateRepository import PopulateRepository
 from repository_save.data_source.DBExecuteSQL import DBExecuteSQL
-from class_structure.Repository import Repository
+from repository_save.class_structure.Repository import Repository
 from unittest import TestCase
 
 class TestPopulateRepository(TestCase):
