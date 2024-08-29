@@ -43,17 +43,11 @@ class Main():
         print("First batch", developers)
         print("Second batch", populate_developer.next_batch_select(select_cursor, 5))
         select_cursor.close()
-
-    def version_control(self):
-        version_control_git = VersionControlGit()
-        repo = version_control_git.get_repo("output/dummy-repo","https://github.com/DerekSomervilleUofG/dummy-repo.git")
-        print("Number of commits", len(version_control_git.get_commits_on_branch(repo, None, None)))
         
 def main():
     repository_main = RepositoryMain()
     repository_main.main("../refactor_code_base/src/resource/database/")
     main = Main()
-    main.version_control()
     main.test_run_class_structure()
     main.test_run_developer_batch()
 
