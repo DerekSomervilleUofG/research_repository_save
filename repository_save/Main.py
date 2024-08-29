@@ -48,6 +48,6 @@ class Main():
         if self.read_write_file.dir_exists(path):
             self.process_directory(path)
         elif ".db":
-            self.process_database(path)
+            self.process_each_database(path)
         self.after_processing()
 
