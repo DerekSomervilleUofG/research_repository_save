@@ -23,6 +23,11 @@ class Main():
 
     def database_setup(self):
         self.database_create.setup()
+
+    def handle_database_exception(self, ex):
+        self.communication.send_email("derek.somerville@glasgow.ac.uk", "FAILURE REPSITORY_SAVE.MAIN", str(ex))
+        raise ex
+
         
     def main(self, directory):
         self.before_processing()
@@ -34,7 +39,6 @@ class Main():
                 try:
                     self.process_database(self.control_populate)
                 except Exception as ex:
-                    self.communication.send_email("derek.somerville@glasgow.ac.uk", "FAILURE REPSITORY_SAVE.MAIN", str(ex))
-                    raise ex
+                    self.handle_database_exception(ex)
         self.after_processing()
 
