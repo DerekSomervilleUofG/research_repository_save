@@ -10,6 +10,7 @@ from repository_save.class_structure.Developer import Developer
 from repository_save.version_control.VersionControlGit import VersionControlGit
 from repository_save.Main import Main as RepositoryMain
 from class_structure.AmendmentType import *
+import sys
 
 class Main():
 
@@ -44,12 +45,16 @@ class Main():
         print("Second batch", populate_developer.next_batch_select(select_cursor, 5))
         select_cursor.close()
         
-def main():
+def main(directory):
     repository_main = RepositoryMain()
-    repository_main.main("../refactor_code_base/src/resource/database/")
-    main = Main()
-    main.test_run_class_structure()
-    main.test_run_developer_batch()
+    repository_main.main(directory)
+    #main = Main()
+    #main.test_run_class_structure()
+    #main.test_run_developer_batch()
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1:
+        directory = sys.argv[1]
+    else:
+        directory = "../refactor_code_base/src/resource/database/"    
+    main(directory)
