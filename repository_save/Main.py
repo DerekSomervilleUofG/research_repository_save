@@ -29,14 +29,15 @@ class Main():
         raise ex
 
     def process_each_database(self, database):
-        self.communication.send_email("derek.somerville@glasgow.ac.uk", "Process Database: " + database, "Processing database " + database)
+        self.communication.send_email("derek.somerville@glasgow.ac.uk", "Start Process Database: " + database, "Processing database " + database)
         self.control_populate.set_db_file_name(database)
         self.database_setup()
         try:
             self.process_database(self.control_populate)
         except Exception as ex:
             self.handle_database_exception(ex, database)
-     
+        self.communication.send_email("derek.somerville@glasgow.ac.uk", "Completed Database: " + database, "Completed database " + database)
+        
 
     def process_directory(self, directory):
         for database in self.read_write_file.get_list_from_directory(directory):
