@@ -3,6 +3,7 @@ from utility.ReadWriteFile import ReadWriteFile
 from repository_save.data_source.DatabaseCreate import DatabaseCreate
 from utility.Communication import Communication
 from utility.UtilityText import UtilityText
+import os
 
 class Main():
     
@@ -16,6 +17,12 @@ class Main():
 
     def __init__(self) -> None:
         self.database_create = DatabaseCreate(self.control_populate.get_db_execute_sql())
+        directory = os.getcwd()
+        if "/" in directory:
+            delimiter = "/"
+        else:
+            delimiter = "\\"
+        self.program_name = directory.split(delimiter)[-1]
     
     def set_exclusive_lock(self):
         self.control_populate.get_db_execute_sql().set_exclusive_lock(self.exclusive_lock)
@@ -29,7 +36,7 @@ class Main():
     def after_processing(self):
         if self.read_write_file.file_exists(self.failure_report):
             errors = self.read_write_file.get_file_as_string(self.failure_report)
-            self.communication.send_email("derek.somerville@glasgow.ac.uk", "DATABASE FAILURE: ", errors)
+            self.communication.send_email("derek.somerville@glasgow.ac.uk", self.program_name + " DATABASE FAILURE: ", errors)
             
 
     def database_setup(self):
@@ -39,12 +46,15 @@ class Main():
         raise ex 
 
     def handle_database_exception(self, ex, database):
-        self.communication.send_email(self.email_to, "FAILURE REPSITORY_SAVE.MAIN: " + database, str(ex))
+        self.communication.send_email(self.email_to, self.program_name + " FAILURE REPSITORY_SAVE.MAIN: " + database, str(ex))
         self.read_write_file.append_to_file(self.failure_report, database + "," + UtilityText.formate_text(str(ex)))
         self.raise_exception(ex)
 
+    def before_database(self):
+        self.communication.send_email(self.email_to, self.program_name + " Start Process Database: " + database, "Processing database " + database)
+        
     def process_each_database(self, database):
-        self.communication.send_email(self.email_to, "Start Process Database: " + database, "Processing database " + database)
+        self.before_database()
         self.set_exclusive_lock()
         self.control_populate.set_db_file_name(database)
         self.database_setup()
@@ -52,8 +62,10 @@ class Main():
             self.process_database(self.control_populate)
         except Exception as ex:
             self.handle_database_exception(ex, database)
-        self.communication.send_email("derek.somerville@glasgow.ac.uk", "Completed Database: " + database, "Completed database " + database)
+        self.after_database()
         
+    def after_database(self):        
+        self.communication.send_email("derek.somerville@glasgow.ac.uk", self.program_name + " Completed Database: " + database, "Completed database " + database)
 
     def process_directory(self, directory):
         for database in self.read_write_file.get_list_from_directory(directory):
