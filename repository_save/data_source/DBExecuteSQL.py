@@ -6,6 +6,10 @@ class DBExecuteSQL(object):
     db_connector = DBConnection()
     connection = None
     batch_size = 1000
+    exclusive_lock = True
+    
+    def set_exclusive_lock(self, lock):
+        self.exclusive_lock = lock
    
     def set_db_connector(self, db_connector):
         self.db_connector = db_connector
@@ -26,7 +30,8 @@ class DBExecuteSQL(object):
         if self.connection == None:
             try:
                 self.connection = self.db_connector.create_connection()
-                self.begin_exclusive()
+                if self.exclusive_lock:
+                    self.begin_exclusive()
             except sqlite3.Error as sqlExp:
                 print("DBExecuteSQL.get_connection", "An error occurred:" + sqlExp.args[0])
                 raise
