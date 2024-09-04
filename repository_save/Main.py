@@ -71,7 +71,7 @@ class Main():
 
     def process_directory(self, directory):
         for database in self.read_write_file.get_list_from_directory(directory):
-            if ".db" in database and database not in self.database_already_complete:
+            if ".db" == database[-3:] and database not in self.database_already_complete:
                 self.process_each_database(directory + database)    
         
     def main(self, path):
