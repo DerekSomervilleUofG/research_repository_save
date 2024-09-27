@@ -1,9 +1,9 @@
 from repository_save.population_mapping.PopulateDeveloper import PopulateDeveloper
 from utility.UtilityText import UtilityText
 from utility.ListUtility import ListUtility
-from repository_save.population_mapping.PopulateStructure import PopulateStructure
+from repository_save.population_mapping.PopulateStructureIndividual import PopulateStructureIndividual
 
-class PopulateDeveloperCommit(PopulateStructure):
+class PopulateDeveloperCommit(PopulateStructureIndividual):
 
     created = False
 
