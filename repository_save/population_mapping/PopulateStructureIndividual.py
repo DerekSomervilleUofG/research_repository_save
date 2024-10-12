@@ -1,6 +1,10 @@
 from repository_save.population_mapping.PopulateStructure import PopulateStructure
 
 class PopulateStructureIndividual(PopulateStructure):
+    
+    def __init__(self, db_execute_sql):
+        super().__init__(db_execute_sql)
+        self.include_primary_key_in_insert = False
 
     def except_save_rows(self, sql_rows):
         last_id = 0

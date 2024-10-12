@@ -13,3 +13,6 @@ class TestPopulateDeveloper(TestCase):
     
     def test_generate_row(self):
         self.assertEqual( ["Derek", "derek.somerville@glasgow.ac.uk", "derek.somerville"] ,self.populate_developer.generate_row(self.developer))
+        
+    def test_get_insert_columns(self):
+        self.assertEqual(" name, email, login", self.populate_developer.get_insert_columns())

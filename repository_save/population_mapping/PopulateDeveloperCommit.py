@@ -15,7 +15,7 @@ class PopulateDeveloperCommit(PopulateStructureIndividual):
         self.developer_id = 3
         self.table_name = "developer_commit"
         self.all_columns = "commit_id, authored_date, repository_id, developer_id"
-        self.primary_key = ""  # We save with the commit_id
+        self.primary_key = "commit_id"
         self.foreign_key = "repository_id"
         if not self.created:
             self.sql_rows = []
