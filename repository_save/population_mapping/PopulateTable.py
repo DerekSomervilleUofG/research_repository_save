@@ -9,9 +9,9 @@ class PopulateTable:
         self.sql_rows = []
         self.list_structures = []
 
-        self.table_name = ""
+        self.table_name = "table_name"
         self.all_columns = ""
-        self.primary_key = ""
+        self.primary_key = "primary_key"
         self.foreign_key = ""
         self.counter = 0
         self.has_next = True
@@ -181,3 +181,33 @@ class PopulateTable:
         self.sql_rows = []
         self.counter = 0
         return latest_id
+    
+    def generate_update_of_column(self, column_name, column_value):
+        if isinstance(column_value, str):
+            column_value = "'" + column_value + "'"
+        else:
+            column_value = str(column_value)
+        return " " + column_name + " = " + column_value + " "
+    
+    def generate_update_of_columns(self, row, columns, values):
+        update_statement = "UPDATE " + self.table_name + " SET"
+        column_statement = ""
+        for counter in range(len(columns)):
+            if column_statement != "":
+                column_statement += ","
+            column_statement += self.generate_update_of_column(columns[counter], row[values[counter]])
+        update_statement += column_statement
+        update_statement += "WHERE " + self.primary_key + " = " + str(row[0]) + ";\n"
+        return update_statement
+    
+    def generate_update_statement(self, sql_rows, columns, values):
+        sql_update_statement = ""
+        for row in sql_rows:
+            sql_update_statement += self.generate_update_of_columns(row, columns, values)    
+        return sql_update_statement
+    
+    def update_rows(self, columns, values):
+        self.get_structure_rows()
+        sql_data = self.db_execute_sql.execute_sql_command(self.generate_update_statement(self.sql_rows))
+        self.sql_rows = []
+        self.counter = 0
