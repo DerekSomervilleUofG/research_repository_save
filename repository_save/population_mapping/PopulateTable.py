@@ -183,11 +183,15 @@ class PopulateTable:
         self.counter = 0
         return latest_id
     
-    def generate_update_of_column(self, column_name, column_value):
+    def convert_if_string(column_value):
         if isinstance(column_value, str):
             column_value = "'" + column_value + "'"
         else:
             column_value = str(column_value)
+        return column_value
+    
+    def generate_update_of_column(self, column_name, column_value):
+        column_value = self.convert_if_string(column_value)
         return " " + column_name + " = " + column_value + " "
     
     def generate_update_of_columns(self, row, columns, values):
@@ -198,7 +202,7 @@ class PopulateTable:
                 column_statement += ","
             column_statement += self.generate_update_of_column(columns[counter], row[values[counter]])
         update_statement += column_statement
-        update_statement += "WHERE " + self.primary_key + " = " + str(row[0]) + ";\n"
+        update_statement += "WHERE " + self.primary_key + " = " + self.convert_if_string(row[0]) + ";\n"
         return update_statement
     
     def generate_update_statement(self, sql_rows, columns, values):
