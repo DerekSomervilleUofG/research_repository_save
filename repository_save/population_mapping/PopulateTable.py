@@ -183,7 +183,7 @@ class PopulateTable:
         self.counter = 0
         return latest_id
     
-    def convert_if_string(column_value):
+    def convert_if_string(self, column_value):
         if isinstance(column_value, str):
             column_value = "'" + column_value + "'"
         else:
