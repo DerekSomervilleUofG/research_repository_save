@@ -41,6 +41,10 @@ class TestPopulateTable(TestCase):
     def test_generate_update_of_columns_three(self):
         self.assertEqual("UPDATE table_name SET column_name = 2 , column2 = 3 , column3 = 4 WHERE primary_key = 1;\n", self.populate_table.generate_update_of_columns([1,2,3,4], ["column_name", "column2", "column3"], [1,2,3]) )
 
+    def test_generate_update_of_columns_three_primary_string(self):
+        self.assertEqual("UPDATE table_name SET column_name = 2 , column2 = 3 , column3 = 4 WHERE primary_key = '1';\n", self.populate_table.generate_update_of_columns(['1',2,3,4], ["column_name", "column2", "column3"], [1,2,3]) )
+
+
     def test_convert_if_string_number(self):
         self.assertEqual("1", self.populate_table.convert_if_string(1))
 
