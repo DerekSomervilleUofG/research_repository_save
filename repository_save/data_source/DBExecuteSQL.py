@@ -61,7 +61,7 @@ class DBExecuteSQL(object):
             raise
         self.get_connection().commit()
 
-    def execute_sql_script(self):
+    def execute_sql_script(self, sql_command):
         try:
             execute_cursor = self.get_connection().cursor()
             execute_cursor.executescript(sql_command)
