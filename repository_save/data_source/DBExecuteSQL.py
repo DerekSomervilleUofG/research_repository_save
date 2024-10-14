@@ -61,6 +61,24 @@ class DBExecuteSQL(object):
             raise
         self.get_connection().commit()
 
+    def execute_sql_script(self):
+        try:
+            execute_cursor = self.get_connection().cursor()
+            execute_cursor.executescript(sql_command)
+            execute_cursor.close()
+        except sqlite3.Error as sqlExp:
+            print("DBExecuteSQL.execute_sql_command", "An error occurred:" + sqlExp.args[0])
+            print("DBExecuteSQL.execute_sql_command", "With command:" + sql_command)
+            raise
+        except Exception as e:
+            print("DBExecuteSQL.execute_sql_command", "With command:" + sql_command)
+            raise
+        except:
+            print("DBExecuteSQL.execute_sql_command", "With command:" + sql_command)
+            raise
+        self.get_connection().commit()
+
+
     def insert_data(self, sql_command, data_rows):
         sql_data = None
         insert_data_cursor = self.get_connection().cursor()
