@@ -78,6 +78,20 @@ class DBExecuteSQL(object):
             raise
         self.get_connection().commit()
 
+    def insert_data_for_breaks(self, insert_data_cursor, sql_command, data_rows):
+        save_rows = []
+        for row in data_rows:
+            save_rows = []
+            save_rows.append(row)
+            try:
+                insert_data_cursor.executemany(sql_command, data_rows)
+            except sqlite3.Error as sqlExp:
+                print("DBExecuteSQL.insert_data", "An error occurred:" + sqlExp.args[0])
+                print(sql_command)
+                print(data_rows)
+        insert_data_cursor.execute("SELECT last_insert_rowid()")
+        return insert_data_cursor.fetchall()
+
 
     def insert_data(self, sql_command, data_rows):
         sql_data = None
@@ -87,11 +101,7 @@ class DBExecuteSQL(object):
             insert_data_cursor.execute("SELECT last_insert_rowid()")
             sql_data = insert_data_cursor.fetchall()
         except sqlite3.Error as sqlExp:
-            print("DBExecuteSQL.insert_data", "An error occurred:" + sqlExp.args[0])
-            print(sql_command)
-            if len(data_rows) > 0:
-                print(data_rows)
-            raise
+            sql_data = self.insert_data_for_breaks(insert_data_cursor, sql_command, data_rows)
         insert_data_cursor.close()
         self.get_connection().commit()
         return sql_data
