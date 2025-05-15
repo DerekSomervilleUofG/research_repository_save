@@ -12,6 +12,9 @@ class PopulateStructure(PopulateTable):
         self.name_col = 1
         self.foreign_key_col = 2
 
+    def get_name(self, name):
+        return name
+
     def update_structure_id(self, structures, sql_structures):
         structure_dict = {}
         for sql_structure in sql_structures:
