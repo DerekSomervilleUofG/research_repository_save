@@ -21,4 +21,4 @@ class PopulateDeveloperExperience(PopulateStructure):
         self.created = True
 
     def generate_row(self, developer_experience):
-        return ["'" + UtilityText.formate_text(developer_experience.get_name()) + "'","'" + developer_experience.language + "'",  int(developer_experience.get_pull_date()) , str(developer_experience.developer.get_primary_key()) ]
+        return ["'" + UtilityText.formate_text(developer_experience.get_name()) + "'","'" + developer_experience.language + "'",  int(developer_experience.get_pull_date()) , str(developer_experience.developer_id) ]
