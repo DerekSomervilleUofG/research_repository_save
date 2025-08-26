@@ -101,6 +101,7 @@ class PopulateTable:
         return sql_data
     
     def prepare_batch_select(self):
+        self.has_next = True
         return self.db_execute_sql.prepare_batch_select(self.generate_select_record(self.table_name, self.all_columns))
 
     def prepare_batch_select(self, select):
