@@ -6,7 +6,6 @@ class PopulateTable:
 
     def __init__(self, db_execute_sql):
         self.db_execute_sql = db_execute_sql
-        self.sql_rows = []
         self.list_structures = []
 
         self.table_name = "table_name"
@@ -167,23 +166,22 @@ class PopulateTable:
         if existing_structure is None:
             self.list_structures.append(new_structure)
 
-    def add_row(self, row):
-        self.sql_rows.append(row)
-
     def generate_row(self, structure):
         return [structure.get_name()]
 
     def get_structure_rows(self):
+        sql_rows = []
         for structure in self.list_structures:
             if structure.is_active() and structure.get_primary_key() == 0:
-                self.sql_rows.append(self.generate_row(structure))
+                sql_rows.append(self.generate_row(structure))
+        self.list_structures = []
+        return sql_rows
 
     def save_rows(self):
         latest_id = 0
-        self.get_structure_rows()
-        if len(self.sql_rows) > 0:
-            latest_id = self.insert_with_data(self.sql_rows)
-        self.sql_rows = []
+        sql_rows = self.get_structure_rows()
+        if len(sql_rows) > 0:
+            latest_id = self.insert_with_data(sql_rows)
         self.counter = 0
         return latest_id
     
@@ -216,7 +214,6 @@ class PopulateTable:
         return sql_update_statement
     
     def update_rows(self, columns, values):
-        self.get_structure_rows()
-        sql_data = self.db_execute_sql.execute_sql_command(self.generate_update_statement(self.sql_rows))
-        self.sql_rows = []
+        sql_rows = self.get_structure_rows()
+        sql_data = self.db_execute_sql.execute_sql_command(self.generate_update_statement(sql_rows))
         self.counter = 0
