@@ -12,7 +12,6 @@ class PopulateTable:
         self.all_columns = ""
         self.primary_key = "primary_key"
         self.foreign_key = ""
-        self.counter = 0
         self.has_next = True
         self.include_primary_key_in_insert = True
 
@@ -182,7 +181,6 @@ class PopulateTable:
         sql_rows = self.get_structure_rows()
         if len(sql_rows) > 0:
             latest_id = self.insert_with_data(sql_rows)
-        self.counter = 0
         return latest_id
     
     def convert_if_string(self, column_value):
@@ -216,4 +214,3 @@ class PopulateTable:
     def update_rows(self, columns, values):
         sql_rows = self.get_structure_rows()
         sql_data = self.db_execute_sql.execute_sql_command(self.generate_update_statement(sql_rows))
-        self.counter = 0
