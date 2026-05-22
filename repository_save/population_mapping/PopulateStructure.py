@@ -55,4 +55,4 @@ class PopulateStructure(PopulateTable):
         structure_dict = {}
         if len(self.list_structures) > 0:
             self.populate_structure_id(self.list_structures, structure_id, structure_dict)
-            self.list_structures = []
+        self.clear()

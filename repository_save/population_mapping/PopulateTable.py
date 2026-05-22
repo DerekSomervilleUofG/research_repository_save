@@ -183,8 +183,13 @@ class PopulateTable:
         if len(sql_rows) > 0:
             latest_id = self.insert_with_data(sql_rows)
         self.counter = 0
+        self.clear()
         return latest_id
     
+
+    def clear(self):
+        self.list_structures.clear()
+
     def convert_if_string(self, column_value):
         if isinstance(column_value, str):
             column_value = "'" + column_value + "'"
