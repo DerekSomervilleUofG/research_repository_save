@@ -174,7 +174,7 @@ class PopulateTable:
         for structure in self.list_structures:
             if structure.is_active() and structure.get_primary_key() == 0:
                 sql_rows.append(self.generate_row(structure))
-        self.list_structures = []
+        self.list_structures.clear()
         return sql_rows
 
     def save_rows(self):
